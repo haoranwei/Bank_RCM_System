@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 扫描service相关的bean -->
+    <context:component-scan base-package="com.haoranwei.service" />
+
+<!--    请在这里维护serviceImpl-->
+    <!--BookServiceImpl注入到IOC容器中-->
+    <bean id="cusDocServiceImpl" class="com.haoranwei.service.impl.cusDocServiceImpl">
+        <property name="cusDocMapper" ref="cusDocMapper"/>
+    </bean>
+    <bean id="loanApplyServiceImpl" class="com.haoranwei.service.impl.loanApplyServiceImpl">
+        <property name="loanApplyMapper" ref="loanApplyMapper"/>
+    </bean>
+    <bean id="repayManageServiceImpl" class="com.haoranwei.service.impl.repayManageServiceImpl">
+        <property name="repayManageMapper" ref="repayManageMapper"/>
+    </bean>
+    <bean id="lendManageServiceImpl" class="com.haoranwei.service.impl.lendManageServiceImpl">
+        <property name="lendManageMapper" ref="lendManageMapper"/>
+    </bean>
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+</beans>

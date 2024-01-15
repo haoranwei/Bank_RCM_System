@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haoranwei.mapper.repayManageMapper">
+    <resultMap id="loanApplyResultMap" type="com.haoranwei.bean.loanApply">
+        <id property="loanId" column="loanId"/>
+        <result property="name" column="name"/>
+        <result property="applyTime" column="applyTime"/>
+        <result property="loanAmount" column="loanAmount"/>
+        <result property="repayTerm" column="repayTerm"/>
+        <result property="interestRate" column="interestRate"/>
+        <result property="collateralMethod" column="collateralMethod"/>
+        <result property="approvalStatus" column="approvalStatus"/>
+        <result property="repaymentTime" column="repaymentTime"/>
+        <result property="repaymentAmount" column="repaymentAmount"/>
+        <result property="repaymentMethod" column="repaymentMethod"/>
+        <result property="repaymentStatus" column="repaymentStatus"/>
+        <result property="loanBalance" column="loanBalance"/>
+        <result property="overdueStatus" column="overdueStatus"/>
+        <result property="collectionRecords" column="collectionRecords"/>
+        <result property="disbursementTime" column="disbursementTime"/>
+        <result property="disbursementAmount" column="disbursementAmount"/>
+        <result property="disbursementMethod" column="disbursementMethod"/>
+        <result property="disbursementStatus" column="disbursementStatus"/>
+    </resultMap>
+
+    <select id="getAllLoanApplies" resultMap="loanApplyResultMap">
+        SELECT * FROM loanapply
+    </select>
+
+    <select id="getLoanApplyById" resultMap="loanApplyResultMap">
+        SELECT * FROM loanapply WHERE loanId = #{loanId}
+    </select>
+
+    <insert id="addLoanApply">
+        INSERT INTO loanapply (loanId, name, applyTime, loanAmount, repayTerm, interestRate, collateralMethod,
+                               approvalStatus, repaymentTime, repaymentAmount, repaymentMethod, repaymentStatus, loanBalance,
+                               overdueStatus, collectionRecords, disbursementTime, disbursementAmount, disbursementMethod, disbursementStatus)
+        VALUES (#{loanId}, #{name}, #{applyTime}, #{loanAmount}, #{repayTerm}, #{interestRate}, #{collateralMethod},
+                #{approvalStatus}, #{repaymentTime}, #{repaymentAmount}, #{repaymentMethod}, #{repaymentStatus}, #{loanBalance},
+                #{overdueStatus}, #{collectionRecords}, #{disbursementTime}, #{disbursementAmount}, #{disbursementMethod}, #{disbursementStatus})
+    </insert>
+
+    <update id="updateLoanApply">
+        UPDATE loanapply SET repayTerm = #{repayTerm}, interestRate = #{interestRate}, collateralMethod = #{collateralMethod},
+                             approvalStatus = #{approvalStatus}, repaymentTime = #{repaymentTime}, repaymentAmount = #{repaymentAmount},
+                             repaymentMethod = #{repaymentMethod}, repaymentStatus = #{repaymentStatus}, loanBalance = #{loanBalance},
+                             overdueStatus = #{overdueStatus}, collectionRecords = #{collectionRecords}
+        WHERE loanId = #{loanId}
+    </update>
+
+    <delete id="deleteLoanApply">
+        DELETE FROM loanapply WHERE loanId = #{loanId}
+    </delete>
+</mapper>
+
+<!--<update id="updateLoanApply">-->
+<!--UPDATE loanapply SET name = #{name}, applyTime = #{applyTime}, loanAmount = #{loanAmount},-->
+<!--                     repayTerm = #{repayTerm}, interestRate = #{interestRate}, collateralMethod = #{collateralMethod},-->
+<!--                     approvalStatus = #{approvalStatus}, repaymentTime = #{repaymentTime}, repaymentAmount = #{repaymentAmount},-->
+<!--                     repaymentMethod = #{repaymentMethod}, repaymentStatus = #{repaymentStatus}, loanBalance = #{loanBalance},-->
+<!--                     overdueStatus = #{overdueStatus}, collectionRecords = #{collectionRecords}, disbursementTime = #{disbursementTime},-->
+<!--                     disbursementAmount = #{disbursementAmount}, disbursementMethod = #{disbursementMethod},-->
+<!--                     disbursementStatus = #{disbursementStatus}-->
+<!--WHERE loanId = #{loanId}-->
+<!--</update>-->

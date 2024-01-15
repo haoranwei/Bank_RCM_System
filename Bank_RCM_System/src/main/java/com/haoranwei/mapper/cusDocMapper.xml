@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haoranwei.mapper.cusDocMapper">
+<!--    注意命名空间要配置正确-->
+
+    <resultMap id="cusDocResultMap" type="com.haoranwei.bean.cusDoc">
+        <id property="customerId" column="customerId"/>
+        <result property="name" column="name"/>
+        <result property="idCard" column="idCard"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+        <result property="occupation" column="occupation"/>
+        <result property="income" column="income"/>
+        <result property="loanRecords" column="loanRecords"/>
+        <result property="creditScore" column="creditScore"/>
+    </resultMap>
+
+    <sql id="cusDocColumns">
+        customerId, name, idCard, phone, address, occupation, income, loanRecords, creditScore
+    </sql>
+
+    <select id="getAllCustomers" resultMap="cusDocResultMap">
+        SELECT <include refid="cusDocColumns"/>
+        FROM cusdoc
+    </select>
+
+    <select id="getCustomerById" resultMap="cusDocResultMap">
+        SELECT <include refid="cusDocColumns"/>
+        FROM cusdoc
+        WHERE customerId = #{customerId}
+    </select>
+
+    <insert id="addCustomer">
+        INSERT INTO cusdoc (<include refid="cusDocColumns"/>)
+        VALUES (#{customerId}, #{name}, #{idCard}, #{phone}, #{address}, #{occupation}, #{income}, #{loanRecords}, #{creditScore})
+    </insert>
+
+    <update id="updateCustomer">
+        UPDATE cusdoc
+        SET name = #{name}, idCard = #{idCard}, phone = #{phone}, address = #{address}, occupation = #{occupation},
+            income = #{income}, loanRecords = #{loanRecords}, creditScore = #{creditScore}
+        WHERE customerId = #{customerId}
+    </update>
+
+    <delete id="deleteCustomer">
+        DELETE FROM cusdoc
+        WHERE customerId = #{customerId}
+    </delete>
+</mapper>
